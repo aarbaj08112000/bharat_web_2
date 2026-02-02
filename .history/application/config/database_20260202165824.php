@@ -79,7 +79,7 @@ $db['default'] = array(
 	'hostname' => 'localhost', 
 	'username' => 'root',
 	'password' => 'Root@12345678',
-	'database' => 'bharat_id_solution',
+	'database' => 'food_token',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
@@ -97,9 +97,10 @@ $db['default'] = array(
 	'port' => 3307
 );
 
-if($_SERVER['SERVER_NAME'] == 'bharatweb2.codecrafterinfotech.online'){
+if($_SERVER['SERVER_NAME'] == 'foodtooken.codecrafterinfotech.online'){
 	$db['default']['username'] = 'u875583157_bharatweb2';
-	$db['default']['password'] = 'FoodToken@2026';
+	$db['default']['password'] = 'CodeCrafter@032022';
 	$db['default']['database'] = 'u875583157_bharatweb2';
 }	
 
+	
