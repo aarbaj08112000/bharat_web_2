@@ -99,7 +99,7 @@ $db['default'] = array(
 
 if($_SERVER['SERVER_NAME'] == 'bharatweb2.codecrafterinfotech.online'){
 	$db['default']['username'] = 'u875583157_bharatweb2';
-	$db['default']['password'] = 'CodeCrafter@032022';
+	$db['default']['password'] = 'FoodToken@2026';
 	$db['default']['database'] = 'u875583157_bharatweb2';
 }	
 
