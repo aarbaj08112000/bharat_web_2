@@ -75,11 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	// 'hostname' => 'host.docker.internal', 
-	'hostname' => 'localhost', 
-	'username' => 'root',
-	'password' => 'Root@12345678',
-	'database' => 'food_token',
+	'hostname' => 'localhost',
+	'username' => 'u875583157_bharatidweb',
+	'password' => 'U875583157_bharatidweb',
+	'database' => 'u875583157_bharatidweb',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
@@ -93,14 +92,5 @@ $db['default'] = array(
 	'compress' => FALSE,
 	'stricton' => FALSE,
 	'failover' => array(),
-	'save_queries' => TRUE,
-	'port' => 3307
+	'save_queries' => TRUE
 );
-
-if($_SERVER['SERVER_NAME'] == 'bharatweb2.codecrafterinfotech.online'){
-	$db['default']['username'] = 'u875583157_bharatweb2';
-	$db['default']['password'] = 'CodeCrafter@032022';
-	$db['default']['database'] = 'u875583157_bharatweb2';
-}	
-
-	
