@@ -113,9 +113,8 @@ class CI_Router
 	 */
 	public $enable_query_strings = FALSE;
 
-	public $url;
 	// --------------------------------------------------------------------
-	public $uri;
+
 	/**
 	 * Class constructor
 	 *
