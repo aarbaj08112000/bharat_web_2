@@ -1,174 +1,168 @@
-<footer class="page-footer bg-image" style="background-image: url(./public/assets_front/img/world_pattern.svg);">
-  <div class="container">
-    <div class="row mb-5">
-      <div class="col-lg-5 py-3">
-        <h3>Bharat ID Cards</h3>
-        <p>Bharat ID Solution delivers secure, high-quality ID cards tailored for schools, colleges, businesses, and organizations.With advanced security features and customizable designs, we ensure professionalism and durability in every card.
-          </p>
-
-        <div class="social-media-button">
-          <a href="#"><span class="mai-logo-facebook-f"></span></a>
-          <a href="#"><span class="mai-logo-twitter"></span></a>
-          <a href="#"><span class="mai-logo-google-plus-g"></span></a>
-          <a href="#"><span class="mai-logo-instagram"></span></a>
-          <a href="#"><span class="mai-logo-youtube"></span></a>
-          <a href="https://wa.me/919806271078" target="_blank">
-            <span class="mai-logo-whatsapp"></span>
-          </a>
-        </div>
-      </div>
-      <div class="col-lg-3 py-3">
-        <h5>Company</h5>
-        <ul class="footer-menu">
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="service.html">Service</a></li>
-          <li><a href="product.html">Product</a></li>
-          <li><a href="tnc.html">Terms of Service</a></li>
-          <li><a href="download_product_catalog">Product Catalog</a></li>
-          <li><a href="contact.html">Help & Support</a></li>
-        </ul>
-      </div>
-      <div class="col-lg-4 py-3">
-        <h5>Contact Us</h5>
-        <p>Behind union bank, Inside Happy Home Gali, Mohan Talkies Road, Katni,Pin code - 483501, Madhya Pradesh</p>
-        <p >+91 98062 71078</p>
-        <p >bharatidcard.katni@gmail.com</p>
-      </div>
-    
+  <!-- Footer -->
+  <footer class="bg-slate-900 pt-16 pb-8 border-t border-slate-800 text-gray-400 relative overflow-hidden">
+    <!-- Decorative Background Pattern -->
+    <div class="absolute inset-0 z-0 opacity-10 pointer-events-none">
+        <img src="<%base_url()%>public/assets_front/img/dark_footer_img.svg" alt="" class="w-full h-full object-cover">
     </div>
+    <div class="container mx-auto px-6 relative z-10">
+        <div class="grid md:grid-cols-4 gap-12 mb-12">
+            <div class="md:col-span-2">
+                <a href="index.html" class="flex items-center gap-2 mb-4">
+                    <span class="text-2xl font-bold text-white">Bharat ID Card</span>
+                </a>
+                <p class="max-w-sm leading-relaxed mb-6">
+                    Bharat ID Solution delivers secure, high-quality ID cards tailored for schools, colleges,
+                    businesses, and organizations. With advanced security features and customizable designs, we
+                    ensure professionalism and durability in every card.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-blue-600 hover:text-white transition">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-blue-400 hover:text-white transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-pink-600 hover:text-white transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://wa.me/919806271078" target="_blank" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-green-500 hover:text-white transition">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div>
+                <h4 class="text-lg font-bold text-white mb-6">Company</h4>
+                <ul class="space-y-3">
+                    <li><a href="about.html" class="hover:text-blue-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> About Us</a></li>
+                    <li><a href="service.html" class="hover:text-blue-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Services</a></li>
+                    <li><a href="product.html" class="hover:text-blue-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Products</a></li>
+                    <li><a href="gallery.html" class="hover:text-blue-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Gallery</a></li>
+                    <li><a href="tnc.html" class="hover:text-blue-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Terms & Conditions</a></li>
+                    <li><a href="privacy-policy.html" class="hover:text-blue-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Privacy Policy</a></li>
+                    <li><a href="contact.html" class="hover:text-blue-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Contact Us</a></li>
+                </ul>
+            </div>
 
-    <p class="text-center" id="copyright">Copyright &copy; <%$smarty.now|date_format:"%Y"%>  <a href="https://bharatidcard.com/" target="_blank">Bharat ID Cards</a></p>
-  </div>
-</footer>
-<script src="./public/assets_front/js/jquery-3.5.1.min.js"></script>
+            <div>
+                <h4 class="text-lg font-bold text-white mb-6">Contact Info</h4>
+                <div class="space-y-4">
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-map-marker-alt mt-1 text-blue-500"></i>
+                        <p>Behind union bank, Inside Happy Home Gali, Mohan Talkies Road, Katni - 483501, MP</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-phone-alt text-blue-500"></i>
+                        <p>+91 98062 71078</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-envelope text-blue-500"></i>
+                        <p>bharatidcard.katni@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<script src="./public/assets_front/js/bootstrap.bundle.min.js"></script>
+        <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm">
+            <p>&copy; <%$smarty.now|date_format:"%Y"%> Bharat ID Cards. All rights reserved.</p>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="privacy-policy.html" class="hover:text-white transition">Privacy Policy</a>
+                <a href="tnc.html" class="hover:text-white transition">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+  </footer>
 
-<script src="./public/assets_front/js/google-maps.js"></script>
+  <!-- AOS JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <!-- JQuery Validation -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-<script src="./public/assets_front/vendor/wow/wow.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
-<script src="./public/assets_front/js/theme.js"></script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-
-
-<script>
-    function playVideo() {
-    document.getElementById('videoModal').style.display = 'block';
-    document.getElementById('videoPlayer').play();
-     $('.navbar.sticky').attr('style', 'z-index: 0 !important');
-  }
-
-  function closeVideo() {
-    const player = document.getElementById('videoPlayer');
-    player.pause();
-    player.currentTime = 0;
-    document.getElementById('videoModal').style.display = 'none';
-     $('.navbar.sticky').attr('style', 'z-index: 1080 !important');
-  }
-  $(document).ready(function () {
-    // Validate form
-    $(".owl-carousel").owlCarousel({
-      items: 1,
-      loop: true,
-      margin: 10,
-      nav: true,
-      dots: true,
-      autoplay: true,
-      autoplayTimeout: 3000,
-      autoplayHoverPause: true
+  <script>
+    AOS.init({
+        duration: 800,
+        once: true,
+        offset: 100
     });
-    $('#videoModal').hide(); // Force hide at start
 
-      $('#showVideoBtn').click(function () {
-        $('#videoModal').fadeIn();
-        $('#popupVideo')[0].play();
-      });
+    $(document).ready(function () {
+        $("#visitorForm").validate({
+            rules: {
+                name: "required",
+                city: "required",
+                phone: {
+                    required: true,
+                    digits: true,
+                    minlength: 10,
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                product: "required",
+                quantity: {
+                    required: true,
+                    digits: true,
+                    min: 1
+                }
+            },
+            messages: {
+                name: "Please enter your name",
+                city: "Enter city",
+                phone: "Valid phone required",
+                email: "Valid email required",
+                product: "Select logic",
+                quantity: "Qty required"
+            },
+            submitHandler: function (form) {
+                var submitBtn = $(form).find('button[type="submit"]');
+                var originalBtnText = submitBtn.html();
+                
+                submitBtn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin mr-2"></i> Processing...');
 
-      $('#closeVideoBtn').click(function () {
-        $('#popupVideo')[0].pause();
-        $('#videoModal').fadeOut();
-      });
+                const formData = {
+// ... existing formData logic ...
+                };
 
-    $("#visitorForm").validate({
-      rules: {
-        name: "required",
-        city: "required",
-        phone: {
-          required: true,
-          digits: true,
-          minlength: 10,
-        },
-        email: {
-          required: true,
-          email: true
-        },
-        product: "required",
-        quantity: {
-          required: true,
-          digits: true,
-          min: 1
-        }
-      },
-      messages: {
-        name: "Please enter your name",
-        city: "Please enter your city",
-        phone: {
-          required: "Please enter your phone number",
-          digits: "Only digits allowed",
-          minlength: "At least 10 digits",
-        },
-        email: "Please enter a valid email address",
-        product: "Please enter product name",
-        quantity: {
-          required: "Enter quantity",
-          digits: "Only digits allowed",
-          min: "Minimum 1 item required"
-        }
-      },
-      submitHandler: function (form) {
-        // Prepare data
-        const formData = {
-          name: $("#name").val(),
-          city: $("#city").val(),
-          phone: $("#phone").val(),
-          email: $("#email").val(),
-          product: $("#product").val(),
-          quantity: $("#quantity").val()
-        };
-
-        // Send via AJAX
-        $.ajax({
-          url: "save_visitor_data", // change this to your server script
-          type: "POST",
-          data: formData,
-          success: function (response) {
-              response = JSON.parse(response);
-             if (response.success == 1) {
-             window.location.href = "download_product_catalog";
-              toastr.success(response.msg);
-              setTimeout(function () {
-                $("#visitorForm")[0].reset();
-                $('#exampleModal').modal('hide');
-              }, 1000);
-              
-              }
-           
-          },
-          error: function (xhr, status, error) {
-            alert("Submission failed: " + error);
-          }
+                $.ajax({
+                    url: "save_visitor_data",
+                    type: "POST",
+                    data: formData,
+                    success: function (response) {
+                        try {
+                            response = JSON.parse(response);
+                            if (response.success == 1) {
+                                toastr.success(response.msg);
+                                setTimeout(function () {
+                                    $("#visitorForm")[0].reset();
+                                    submitBtn.prop('disabled', false).html(originalBtnText);
+                                    const modalOverlay = document.getElementById('visitorModalOverlay');
+                                    if(modalOverlay) modalOverlay.classList.add('hidden');
+                                    window.location.href = "download_product_catalog";
+                                }, 1000);
+                            } else {
+                                submitBtn.prop('disabled', false).html(originalBtnText);
+                                toastr.error("Submission failed");
+                            }
+                        } catch(e) {
+                            submitBtn.prop('disabled', false).html(originalBtnText);
+                            console.error(e);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        submitBtn.prop('disabled', false).html(originalBtnText);
+                        toastr.error("Error: " + error);
+                    }
+                });
+            }
         });
-      }
     });
-  });
-</script>
-
-
+  </script>
 </body>
 </html>

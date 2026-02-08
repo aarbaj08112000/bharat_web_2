@@ -1,161 +1,158 @@
-
-<style>
-@media (min-width: 992px) {
-    .modal-lg, .modal-xl {
-        max-width: 950px;
-    }
-}
-</style>
-  <div class="page-section py-5">
-    <div class="container">
-      <div class="row">
-
-        <!-- Card 1 -->
-        <%if ($products) %>
-          <%assign var='i' value= 1 %>
-          <%foreach from=$products item=u %>
-            <div class="col-md-4 col-sm-6 mb-4">
-              <a href="product_details.html?p=<%$u['product_id'] %>" style="text-decoration: none; color: inherit;">
-                <div class="card h-100" style="box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.3); cursor: pointer;">
-                  <img class="card-img-top" src="public/uploads/product/<%$u['image']%>" alt="Image 1" height="250" style="object-fit: cover;">
-                  <div class="card-body">
-                    <h5 class="card-title title_text"><%$u['product_name'] %></h5>
-                    <p class="card-text">Category : <b><%$u['category_name'] %></b></p>
+<div class="page-section py-20 bg-gray-50">
+    <div class="container mx-auto px-6">
         
-                    <!-- Optional: Remove this button since whole card is now clickable -->
-                    <!-- <a href="product_details.html?p=<%$u['product_id'] %>" class="btn btn-primary btn-sm">View</a> -->
-        
-                    <!-- Hidden inputs if needed for JS -->
-                    <input type="hidden" class="hidden-title" value="<%$u['product_name'] %>">
-                    <input type="hidden" class="hidden-category" value="<%$u['category_name'] %>">
-                    <input type="hidden" class="hidden-image" value="public/uploads/product/<%$u['image']%>">
-                    <input type="hidden" class="hidden-description" value="<%$u['description']|strip_tags %>">
-                    <div class="hidden-description-data" style="display: none;"><%$u['description'] %></div>
-                  </div>
-                </div>
-              </a>
-            </div>
-            <%assign var='i' value=$i+1 %>
-          <%/foreach%>
-        <%else%>
-          <div class="col-12 text-center">
-            <h4>No data available.</h4>
-          </div>
-        <%/if%>
-
-
-        <!-- Card 2 -->
-        <!--<div class="col-md-4 col-sm-6 mb-4">
-          <div class="card">
-            <img class="card-img-top" src="https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg" alt="Image 2" height="250">
-            <div class="card-body">
-              <h5 class="card-title">Card Title 2</h5>
-              <p class="card-text">Short description of item 2.</p>
-              <a href="#" class="btn btn-primary btn-sm open-modal"
-                 data-title="Card Title 2"
-                 data-image="https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg"
-                 data-description="Full details about item 2 go here.">
-                 View Details
-              </a>
-            </div>
-          </div>
-        </div>-->
-
-        <!-- Card 3 -->
-        <!--<div class="col-md-4 col-sm-6 mb-4">
-          <div class="card">
-            <img class="card-img-top" src="https://images.pexels.com/photos/210182/pexels-photo-210182.jpeg" alt="Image 3" height="250">
-            <div class="card-body">
-              <h5 class="card-title">Card Title 3</h5>
-              <p class="card-text">Short description of item 3.</p>
-              <a href="#" class="btn btn-primary btn-sm open-modal"
-                 data-title="Card Title 3"
-                 data-image="https://images.pexels.com/photos/210182/pexels-photo-210182.jpeg"
-                 data-description="Full details about item 3 go here.">
-                 View Details
-              </a>
-            </div>
-          </div>
-        </div>-->
-
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal -->
-  <div class="modal fade" id="dynamicModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <h5 class="modal-title title_text" id="modalLabel">Title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-      <div class="modal-body">
-        <div class="row">
-          
-          <!-- Left Column: Image -->
-          <!-- <div class="col-md-6 text-center">
-            <img id="modalImage" src="" class="img-fluid mb-3" alt="Product Image">
-          </div> -->
-          <div class="col-md-6">
-              <div class="d-flex">
-                <div class="d-flex flex-column me-5">
-                    <img src="public/uploads/product/<%$products[0]['image']%>" class="thumbnail mb-2" onclick="changeImage(this)" width="70">
-                    <%foreach from=$products_image item=img %>
-                    <img src="public/uploads/product/<%$img['product_id']%>/<%$img['image']%>" class="thumbnail mb-2" onclick="changeImage(this)" width="70">
-                    <%/foreach%>
-                </div>
-            
-                <!-- Main Image -->
-                <img id="modalImage" src="" class="img-fluid product-image ms-3" alt="Product Image" width="300">
-            </div>
-          </div>
-
-          <!-- Right Column: Details -->
-          <div class="col-md-6">
-            <h4 id="modalProductName" class="title_text"></h4> <!-- Product Name -->
-            <p id="modalcategory" class="mb-2"></p> <!-- Category -->
-            <p id="modalDescription"></p> <!-- Description -->
-          </div>
-
+        <!-- Page Header -->
+        <div class="text-center mb-12" data-aos="fade-up">
+            <h2 class="text-3xl font-bold text-slate-800 mb-4">Our Products</h2>
+            <div class="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
+            <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Browse our premium collection of ID cards and accessories.</p>
         </div>
-      </div>
 
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <%if ($products) %>
+                <%foreach from=$products item=u %>
+                <!-- Product Card -->
+                <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition duration-300 group overflow-hidden border border-gray-100 flex flex-col h-full" data-aos="fade-up">
+                    <div class="relative h-64 overflow-hidden bg-gray-100 cursor-pointer card-trigger">
+                        <img src="public/uploads/product/<%$u['image']%>" alt="<%$u['product_name']%>" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x400?text=No+Image';">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                            <span class="px-6 py-2 bg-white text-slate-800 rounded-full font-bold text-sm transform translate-y-4 group-hover:translate-y-0 transition duration-300 shadow-lg">View Details</span>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6 flex-grow flex flex-col">
+                        <div class="text-xs font-bold text-blue-600 uppercase tracking-wider mb-2"><%$u['category_name']%></div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-3"><%$u['product_name']%></h3>
+                        
+                        <!-- Hidden Data for Modal -->
+                        <div class="hidden">
+                            <input type="hidden" class="hidden-id" value="<%$u['product_id']%>">
+                            <input type="hidden" class="hidden-title" value="<%$u['product_name']%>">
+                            <input type="hidden" class="hidden-category" value="<%$u['category_name']%>">
+                            <input type="hidden" class="hidden-image" value="public/uploads/product/<%$u['image']%>">
+                            <div class="hidden-description-data"><%$u['description']%></div>
+                        </div>
+
+                        <!-- Button - Direct link to detail page -->
+                        <a href="product_details.html?id=<%encode_id($u['product_id'])%>" class="mt-auto w-full py-3 border border-gray-200 rounded-xl text-gray-600 font-bold hover:bg-blue-600 hover:text-white hover:border-blue-600 transition block text-center">
+                            Details
+                        </a>
+                    </div>
+                </div>
+                <%/foreach%>
+            <%else%>
+                <div class="col-span-full text-center py-20">
+                    <div class="inline-block p-6 rounded-full bg-gray-100 text-gray-400 mb-4 text-4xl">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-600">No products found.</h4>
+                    <p class="text-gray-500">Please check back later.</p>
+                </div>
+            <%/if%>
+        </div>
     </div>
-  </div>
 </div>
 
+<!-- Product Detail Modal -->
+<div id="productModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/80 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+    <div class="bg-white w-full max-w-4xl mx-4 rounded-2xl overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 relative flex flex-col md:flex-row h-[90vh] md:h-auto">
+        
+        <!-- Close Button -->
+        <button id="closeProductModal" class="absolute top-4 right-4 z-10 w-10 h-10 bg-white/80 rounded-full flex items-center justify-center hover:bg-white text-gray-800 transition shadow-md">
+            <i class="fas fa-times"></i>
+        </button>
 
-  <!-- Script -->
-  <script>
-    $(document).ready(function () {
-        $('.open-modal').click(function (e) {
-            e.preventDefault();
-            $('.navbar.sticky').attr('style', 'z-index: 0 !important');
-            var container = $(this).closest('.card'); // or another shared parent
-            var title = container.find('.hidden-title').val();
-            var image = container.find('.hidden-image').val();
-            var category = container.find('.hidden-category').val();
-            var description = container.find('.hidden-description').val();
-             var hiddenText = container.find('.hidden-description-data').html();
+        <!-- Image Side -->
+        <div class="md:w-1/2 bg-gray-100 flex items-center justify-center p-8 relative">
+            <img id="modalImage" src="" alt="Product" class="max-h-[60vh] md:max-h-[500px] object-contain shadow-lg rounded-lg" onerror="this.onerror=null; this.src='https://placehold.co/600x400?text=No+Image';">
+        </div>
 
-            $('#modalLabel').text(title);
-            $('#modalProductName').text(title);
+        <!-- Content Side -->
+        <div class="md:w-1/2 p-8 md:p-10 flex flex-col overflow-y-auto">
+            <div class="mb-4">
+                <span id="modalCategory" class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold uppercase tracking-wide">Category</span>
+            </div>
+            <h2 id="modalTitle" class="text-3xl font-bold text-slate-800 mb-6">Product Name</h2>
+            
+            <div class="text-gray-600 mb-6" id="modalDescription">
+                <!-- Short description content -->
+            </div>
+            
+            <a href="#" id="modalReadMore" class="inline-flex items-center gap-2 text-blue-600 font-bold hover:text-blue-700 transition mb-6">
+                Read More <i class="fas fa-arrow-right"></i>
+            </a>
+
+            <div class="mt-auto">
+                <a href="contact.html" class="block w-full text-center py-4 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition shadow-lg hover:shadow-blue-500/30">
+                    <i class="fas fa-paper-plane mr-2"></i> Request Quote / Order
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+    const modal = document.getElementById('productModal');
+    const modalContent = modal.querySelector('div'); // The inner white box
+
+    function encode_id(id) {
+        return btoa(id).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    }
+
+    function openModal(card) {
+        const productId = card.find('.hidden-id').val();
+        const title = card.find('.hidden-title').val();
+        const category = card.find('.hidden-category').val();
+        const image = card.find('.hidden-image').val();
+        const fullDesc = card.find('.hidden-description-data').html();
+        
+        // Truncate description to ~150 characters
+        const tempDiv = $('<div>').html(fullDesc);
+        const textContent = tempDiv.text();
+        const truncated = textContent.length > 150 ? textContent.substring(0, 150) + '...' : textContent;
+
+        $('#modalTitle').text(title);
+        $('#modalCategory').text(category);
+        
+        // Check if image path is empty or null, use placeholder
+        if (!image || image.trim() === '' || image === 'null') {
+            $('#modalImage').attr('src', 'https://placehold.co/600x400?text=No+Image+Available');
+        } else {
             $('#modalImage').attr('src', image);
-            $('#modalcategory').html("Category: <strong>" + category + "</strong>");
-            // $('#modalDescription').text(description);
-            $('#modalDescription').html(hiddenText);
+        }
+        
+        $('#modalDescription').text(truncated);
+        $('#modalReadMore').attr('href', 'product_details.html?id=' + encode_id(productId));
 
-            $('#dynamicModal').modal('show');
-        });
-        $('.close').click(function (e) {
-            $('.navbar.sticky').attr('style', 'z-index: 1080 !important');
-        });
+        // Show Modal
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            modal.classList.remove('opacity-0');
+            modalContent.classList.remove('scale-95');
+            modalContent.classList.add('scale-100');
+        }, 10);
+    }
 
+    function closeModal() {
+        modal.classList.add('opacity-0');
+        modalContent.classList.remove('scale-100');
+        modalContent.classList.add('scale-95');
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 300);
+    }
+
+    $('.card-trigger').click(function(e) {
+        e.preventDefault();
+        openModal($(this).closest('.group')); // Find parent container
     });
-  </script>
 
+    $('#closeProductModal').click(closeModal);
+    
+    // Close on click outside
+    $(modal).click(function(e) {
+        if (e.target === modal) closeModal();
+    });
+});
+</script>

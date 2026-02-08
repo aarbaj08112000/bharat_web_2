@@ -170,5 +170,13 @@ function NoDataFoundMessage($module_name =""){
     return $html;
 }
 
+function encode_id($id)
+{
+    return rtrim(strtr(base64_encode($id), '+/', '-_'), '=');
+}
 
+function decode_id($id)
+{
+    return base64_decode(strtr($id, '-_', '+/'));
+}
 ?>

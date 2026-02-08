@@ -43,6 +43,10 @@ $route['dashboard'] = 'user/user/dashboard';
 
 
 
+// Website Template Routes
+$route['website_template'] = 'website_template/website_template/index';
+$route['website_template/(:any)'] = 'website_template/website_template/$1';
+
 // front pages
 $route[''] = 'content/index';
 $route['index.html'] = 'content/index';
@@ -54,6 +58,7 @@ $route['product.html'] = 'content/product';
 $route['service.html'] = 'content/service';
 $route['about.html'] = 'content/about';
 $route['tnc.html'] = 'content/termscondition';
+$route['privacy-policy.html'] = 'content/privacypolicy';
 $route['save_visitor_data'] = 'content/save_visitor_data';
 $route['save_contact_data'] = 'content/save_contact_data';
 $route['save_review_data'] = 'content/save_review_data';

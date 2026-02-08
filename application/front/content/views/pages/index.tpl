@@ -1,740 +1,575 @@
 <style>
-   .flip-card {
-            background-color: transparent;
-            width: 100%;
-            height: 300px;
-            perspective: 1000px;
-        }
-
-        .flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-        }
-
-        .flip-card:hover .flip-card-inner {
-            transform: rotateY(180deg);
-        }
-
-        .flip-card-front, .flip-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .flip-card-front {
-            background: #fff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 10px;
-        }
-
-        .flip-card-front img {
-            width: 100%;
-            height: 70%;
-            object-fit: cover;
-            border-radius: 10px 10px 0 0;
-        }
-
-        .flip-card-front h5 {
-            margin-top: 10px;
-            font-size: 18px;
-        }
-
-        .flip-card-back {
-            /* background: #007bff; */
-            background: linear-gradient(60deg, rgba(84, 58, 183, 1) 0%, rgba(0, 172, 193, 1) 100%);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transform: rotateY(180deg);
-            padding: 15px;
-        }
-        .faq-section {
-            /* background-color: #f8f9fa; */
-            padding: 50px 0;
-        }
-        .faq-header {
-            font-size: 28px;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .card-header {
-            /* background-color: #007bff; */
-            background: linear-gradient(60deg, rgba(84, 58, 183, 1) 0%, rgba(0, 172, 193, 1) 100%);
-            color: white;
-            padding: 0px;
-        }
-        .btn-link {
-            color: white;
-            text-decoration: none;
-            font-size: 18px;
-        }
-        .btn-link:hover {
-            text-decoration: none;
-            color: #f8f9fa;
-        }
-        .btn:focus, .btn.focus {
-    outline: none !important;
-    box-shadow: none !important;
-}
-.btn-link:focus, .btn-link.focus {
-    text-decoration: none;
+/* Hero Background - Clean & Professional */
+.hero-section {
+    background: linear-gradient(to right, #ffffff, #f1f5f9);
+    position: relative;
+    overflow: hidden;
 }
 
+/* Subtle Animated Blobs (Lighter) */
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.6;
+    z-index: 0;
+}
+.blob-1 { top: -10%; left: -5%; width: 400px; height: 400px; background: #e0f2fe; } /* Light Blue */
+.blob-2 { bottom: -10%; right: -5%; width: 500px; height: 500px; background: #f3e8ff; } /* Light Purple */
 
-.review-section {
-      padding: 60px 0;
-    }
-
-    .review-card {
-      background: #fff;
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    }
-
-    .review-card img {
-      border: 2px solid #007bff;
-    }
-
-    .review-card .text-warning {
-      font-size: 18px;
-    }
-
-    .scroll-area {
-      max-height: 500px;
-      overflow-y: auto;
-      padding-right: 10px;
-    }
-
-    .form-section {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-      padding: 30px;
-    }
-
-    .form-control {
-      border-radius: 8px;
-    }
-
-    .btn-primary {
-      background-color: #007bff;
-      border: none;
-      border-radius: 8px;
-    }
-
-    @media (max-width: 768px) {
-      .scroll-area {
-        max-height: none;
-      }
-    }
-
-    /* For modern browsers (Chrome, Edge, Safari) */
-.review-scroll::-webkit-scrollbar {
-  width: 8px;
+/* Card Lift Effect */
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
 }
 
-.review-scroll::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+/* Gradient Text for Headlines */
+.text-gradient {
+    background: linear-gradient(to right, #2563eb, #06b6d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
-
-.review-scroll::-webkit-scrollbar-thumb {
-  background-color: #add8e6; /* Light Blue */
-  border-radius: 10px;
-}
-
-/* For Firefox */
-.review-scroll {
-  scrollbar-width: thin;
-  scrollbar-color: #add8e6 #f1f1f1;
-}
-
 </style>
 
+<!-- Dynamic Hero Section (Slider) -->
+<%if $config['banner']|@count > 0 %>
+<section class="hero-section relative h-[650px] overflow-hidden">
+    <div class="swiper heroSwiper w-full h-full">
+        <div class="swiper-wrapper">
+            <%foreach from=$config['banner'] item=b name=bannerLoop%>
+            <div class="swiper-slide relative flex flex-col items-center justify-end pb-20">
+                <!-- Background Image -->
+                <div class="absolute inset-0 z-0">
+                   <img src="public/uploads/banner/<%$b['banner_image']%>" alt="<%$b['title']%>" class="w-full h-full object-cover">
+                   <!-- No Overlay as requested -->
+                </div>
 
-  <div class="page-section pb-0">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-3">
-          <div class="card-service wow fadeInUp">
-            <div class="header">
-              <img src="./public/assets_front/img/services/graduation-hat.png" alt="" width="75">
-            </div>
-            <div class="body">
-              <h5 class="text-secondary">School/College ID Cards</h5>
-              <p>Custom-designed, durable ID cards with security features like barcodes, QR codes, and RFID for easy identification and access.</p>
-              <!-- <a href="service.html" class="btn btn-primary">Read More</a> -->
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3">
-          <div class="card-service wow fadeInUp">
-            <div class="header">
-              <img src="./public/assets_front/img/services/worker.png" alt="" width="75" >
-            </div>
-            <div class="body">
-              <h5 class="text-secondary">Employee & Corporate ID Cards</h5>
-              <p>Professionally branded ID cards with security enhancements such as holograms, smart chips, and access control integration.</p>
-              <!-- <a href="service.html" class="btn btn-primary">Read More</a> -->
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3">
-          <div class="card-service wow fadeInUp">
-            <div class="header">
-              <img src="./public/assets_front/img/services/smart-id.png" alt="" width="75">
-            </div>
-            <div class="body">
-              <h5 class="text-secondary">Smart ID Cards & RFID Solutions</h5>
-              <p>Advanced contactless ID cards with RFID technology for secure attendance tracking, payments, and authentication.</p>
-              <!-- <a href="service.html" class="btn btn-primary">Read More</a> -->
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3">
-          <div class="card-service wow fadeInUp">
-            <div class="header">
-              <img src="./public/assets_front/img/services/lanyard.png" alt="" width="75">
-            </div>
-            <div class="body">
-              <h5 class="text-secondary">Lanyards & <br>Accessories</h5>
-              <p>Custom-printed lanyards, <br>card holders, and badge reels for convenient and professional ID card management.</p>
-              <!-- <a href="service.html" class="btn btn-primary">Read More</a> -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> <!-- .container -->
-  </div> <!-- .page-section -->
-
-  <div class="page-section mt-0 pt-0" id="about">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-6 py-3 wow fadeInUp">
-          <span class="subhead">About us</span>
-          <!-- <h2 class="title-section">The number #1 SEO Service Company</h2> -->
-          <div class="divider"></div>
-
-          <p>At Bharat ID Solution, we are committed to providing secure, durable, and professional ID cards for schools, colleges, universities, businesses, and organizations. Our ID cards are designed with advanced security features, high-quality printing, and customizable options to meet the specific needs of our clients.</p>
-          <!-- <p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren.</p> -->
-          <!-- <a href="about.html" class="btn btn-primary mt-3">Read More</a> -->
-        </div>
-        <div class="col-lg-6 py-3 wow fadeInRight">
-          <div class="img-fluid py-3 text-center">
-          <img src="./public/assets_front/img/about_us.jpeg" class="about_us_img" alt="" height="500">
-          </div>
-        </div>
-      </div>
-    </div> <!-- .container -->
-  </div> <!-- .page-section -->
-
-  <div class="page-section bg-light">
-    <div class="container">
-      <div class="text-center wow fadeInUp">
-        <div class="subhead">Our services</div>
-        <h2 class="title-section">Comprehensive solutions for custom ID cards, accessories, lanyards, badges, name plates, medals, and raw materials – crafted with quality and precision.</h2>
-        <div class="divider mx-auto"></div>
-      </div>
-
-        <div class="row">
-          <div class="col-sm-6 col-lg-4 col-xl-3 py-3 wow zoomIn">
-            <div class="features">
-              <div class="header mb-3">
-                <span class="">🪪</span>
-              </div>
-              <h5>ID Card</h5>
-              <p>
-              Durable and professional ID Cards in PVC, Acrylic, MDF, and Executive styles – featuring laser cutting and premium finishing options.</p>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4 col-xl-3 py-3 wow zoomIn">
-            <div class="features">
-              <div class="header mb-3">
-                <span class="">🧵</span>
-              </div>
-              <h5>Lanyard</h5>
-              <p>
-              Vibrant multicolour satin lanyards available in 12mm, 16mm, and 20mm widths, ideal for stylish and durable ID card wear.</p>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4 col-xl-3 py-3 wow zoomIn">
-            <div class="features">
-              <div class="header mb-3">
-                <span class="">🧰</span>
-              </div>
-              <h5>Raw Material</h5>
-              <p>Wide range of high-quality ID card accessories including holders, hooks, clips, and yoyo reels, perfect for professional badge assembly.</p>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4 col-xl-3 py-3 wow zoomIn">
-            <div class="features">
-              <div class="header mb-3">
-                <span class="">🏷️</span>
-              </div>
-              <h5>Name Plate</h5>
-              <p>Premium Name Plates for doors, tables, and offices, available in Acrylic, MDF, and Metal for a professional look.</p>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4 col-xl-3 py-3 wow zoomIn">
-            <div class="features">
-              <div class="header mb-3">
-                <span class="">🎖️</span>
-              </div>
-              <h5>Badge</h5>
-              <p>Customizable Badges in Button, Acrylic, and MDF styles—ideal for events, branding, and personal use.</p>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4 col-xl-3 py-3 wow zoomIn">
-            <div class="features">
-              <div class="header mb-3">
-                <span class="">🏅</span>
-              </div>
-              <h5>Medal</h5>
-              <p>Elegant and durable Medals in Metal, Acrylic, and MDF, perfect for awards, achievements, and competitions.</p>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4 col-xl-3 py-3 wow zoomIn">
-            <div class="features">
-              <div class="header mb-3">
-                <span class="">🖼️</span>
-              </div>
-              <h5>Group Photo</h5>
-              <p>Capture memories with Group Photo prints on MDF, Acrylic, and Acrylic Slot for a premium display.</p>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4 col-xl-3 py-3 wow zoomIn">
-            <div class="features">
-              <div class="header mb-3">
-                <span class="">🔑</span>
-              </div>
-              <h5>Key Chain</h5>
-              <p>Premium keychains available in Acrylic and MDF with high-quality photo printing.</p>
-            </div>
-          </div>
-        </div>
-
-    </div> <!-- .container -->
-  </div> <!-- .page-section -->
-
-  <div class="page-section banner-seo-check">
-    <div class="wrap bg-image" style="background-image: url(./public/assets_front/img/bg_pattern.svg);">
-      <div class="container text-center">
-        <div class="row justify-content-center wow fadeInUp">
-          <div class="col-lg-12">
-            <h2 class="mb-4">Our Commitment to Quality</h2>
-            <p>At Bharat ID Solution, we are committed to delivering premium ID card printing using high-quality materials and advanced printing techniques to ensure clear, durable, and professional results. Our ID cards come with secure and reliable features such as barcodes, QR codes, RFID, and holograms for enhanced protection. We offer customizable designs, allowing institutions and companies to personalize their ID cards with logos, branding, and unique details. Designed for durability and longevity, our PVC, plastic, and laminated ID cards withstand daily wear and tear. With our fast and efficient service, we ensure quick turnaround times to meet urgent requirements without compromising on quality. We also provide bulk order solutions and special discounts for schools, colleges, and corporate organizations, making identification solutions more affordable. From ID cards to lanyards, holders, and accessories, we offer a complete identification package to meet all your needs.</p>
-            <!-- <form action="#">
-              <input type="text" class="form-control" placeholder="E.g google.com">
-              <button type="submit" class="btn btn-success">Check Now</button>
-            </form> -->
-          </div>
-        </div>
-      </div> <!-- .container -->
-    </div> <!-- .wrap -->
-  </div> <!-- .page-section -->
-
-  <div class="page-section">
-    <div class="container">
-      <div class="text-center wow fadeInUp">
-        <div class="subhead">Our Offerings</div>
-        <!-- <h2 class="title-section">Choose plan the right for you</h2> -->
-        <div class="divider mx-auto"></div>
-         <div class="row" >
-             <div class="col-md-6 ">
-            <img src="./public/assets_front/img/offering.png" alt="Description of the image" style="width:auto;height:350px;">
-
-
-            </div>
-             <div class="col-md-6 ">
-                 <p style="font-size: 18px;text-align: justify;" >At <b><i> Bharat ID Card</i></b>,we deliver smart, stylish, and functional identity solutions tailored to your needs. Our custom ID cards feature high-quality photo printing, logos, barcodes, and QR codes for enhanced security and branding. We offer premium lanyards, raw materials like PVC sheets and laminates, and group photo printing for schools, offices, and events. Celebrate milestones with custom medals, name plates in acrylic, wood, or metal, and branded key chains perfect for promotions. Every product is fully customizable to reflect your unique identity and elevate your brand.<br><br>
-With quality craftsmanship and attention to detail, we ensure each piece represents you at your best.<br><br>
-<b><i>Partner with us to leave a lasting impression — one identity at a time.</i></b></p>
-            </div>
-        </div>
-        
-      </div>
-
-      <div class="row" style="display:none">
-        <div class="col-md-4 d-flex justify-content-center">
-            <div class="flip-card">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <img src="https://img.freepik.com/free-vector/realistic-neon-lights-background_23-2148907367.jpg" alt="ID Card">
-                        <h5>Student ID Cards</h5>
-                    </div>
-                    <div class="flip-card-back">
-                        <p>Custom-designed student ID cards with secure features like QR codes and RFID.</p>
+                <!-- Content -->
+                <div class="container mx-auto px-6 relative z-10 text-center">
+                    <div class="max-w-4xl mx-auto" data-aos="fade-up">
+                        <h1 class="text-4xl lg:text-6xl font-extrabold text-white mb-6 leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
+                            <%$b['title'] %>
+                        </h1>
+                        <p class="text-white text-lg mb-10 leading-relaxed font-medium drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
+                            <%$b['description'] %>
+                        </p>
+                        
+                        <div class="flex justify-center">
+                            <a href="product.html" class="px-10 py-4 bg-blue-600 text-white font-bold rounded-full hover:bg-blue-700 transition shadow-xl hover:scale-105 transform duration-300">
+                                Explore Products
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
+            <%/foreach%>
         </div>
-        <div class="col-md-4 d-flex justify-content-center">
-            <div class="flip-card">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <img src="https://img.freepik.com/free-vector/realistic-neon-lights-background_23-2148907367.jpg" alt="ID Card">
-                        <h5>Employee ID Cards</h5>
-                    </div>
-                    <div class="flip-card-back">
-                        <p>Professional ID cards for businesses with branding and access control integration.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 d-flex justify-content-center">
-            <div class="flip-card">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <img src="https://img.freepik.com/free-vector/realistic-neon-lights-background_23-2148907367.jpg" alt="ID Card">
-                        <h5>Smart ID Cards</h5>
-                    </div>
-                    <div class="flip-card-back">
-                        <p>RFID-enabled smart ID cards for secure authentication and attendance tracking.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-next text-white/50 hover:text-white"></div>
+        <div class="swiper-button-prev text-white/50 hover:text-white"></div>
     </div>
-      <!-- <div class="row mt-5">
-        <div class="col-lg-4 py-3 wow zoomIn">
-          <div class="card-pricing">
-            <div class="header">
-              <div class="pricing-type">Basic</div>
-              <div class="price">
-                <span class="dollar">$</span>
-                <h1>39<span class="suffix">.99</span></h1>
-              </div>
-              <h5>Per Month</h5>
-            </div>
-            <div class="body">
-              <p>25 Analytics <span class="suffix">Campaign</span></p>
-              <p>1,300 Change <span class="suffix">Keywords</span></p>
-              <p>Social Media <span class="suffix">Reviews</span></p>
-              <p>1 Free <span class="suffix">Optimization</span></p>
-              <p>24/7 <span class="suffix">Support</span></p>
-            </div>
-            <div class="footer">
-              <a href="#" class="btn btn-pricing btn-block">Subscribe</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 py-3 wow zoomIn">
-          <div class="card-pricing marked">
-            <div class="header">
-              <div class="pricing-type">Standar</div>
-              <div class="price">
-                <span class="dollar">$</span>
-                <h1>59<span class="suffix">.99</span></h1>
-              </div>
-              <h5>Per Month</h5>
-            </div>
-            <div class="body">
-              <p>25 Analytics <span class="suffix">Campaign</span></p>
-              <p>1,300 Change <span class="suffix">Keywords</span></p>
-              <p>Social Media <span class="suffix">Reviews</span></p>
-              <p>1 Free <span class="suffix">Optimization</span></p>
-              <p>24/7 <span class="suffix">Support</span></p>
-            </div>
-            <div class="footer">
-              <a href="#" class="btn btn-pricing btn-block">Subscribe</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 py-3 wow zoomIn">
-          <div class="card-pricing">
-            <div class="header">
-              <div class="pricing-type">Professional</div>
-              <div class="price">
-                <span class="dollar">$</span>
-                <h1>99<span class="suffix">.99</span></h1>
-              </div>
-              <h5>Per Month</h5>
-            </div>
-            <div class="body">
-              <p>25 Analytics <span class="suffix">Campaign</span></p>
-              <p>1,300 Change <span class="suffix">Keywords</span></p>
-              <p>Social Media <span class="suffix">Reviews</span></p>
-              <p>1 Free <span class="suffix">Optimization</span></p>
-              <p>24/7 <span class="suffix">Support</span></p>
-            </div>
-            <div class="footer">
-              <a href="#" class="btn btn-pricing btn-block">Subscribe</a>
-            </div>
-          </div>
-        </div>
-
-      </div> -->
-
-    </div> <!-- .container -->
-  </div> <!-- .page-section -->
-
-  <!-- Banner info -->
-  <div class="page-section banner-info" style="background: linear-gradient(60deg, rgba(84, 58, 183, 1) 0%, rgba(0, 172, 193, 1) 100%);">
-    <div class="wrap bg-image" style="background-image: url(./public/assets_front/img/bg_pattern.svg);">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-6 py-3 pr-lg-5 wow fadeInUp">
-            <h2 class="title-section">Why Choose Bharat ID Solution</h2>
-            <div class="divider"></div>
-            <!-- <p>We're an experienced and talented team of passionate consultants who breathe with search engine marketing.</p> -->
-      
-            <ul class="theme-list theme-list-light text-white">
-              <li>
-                <div class="h5">Premium Quality Printing</div>
-                <p>High-resolution prints with vibrant colors.</p>
-              </li>
-              <li>
-                <div class="h5">Bulk Order Support</div>
-                <p>Discounts for large-scale orders.</p>
-              </li>
-              <li>
-                <div class="h5">Quick & Reliable Delivery</div>
-                <p>Fast turnaround time for all projects.</p>
-              </li>
-              <li>
-                <div class="h5">Affordable Pricing</div>
-                <p>Cost-effective solutions without compromising quality.</p>
-              </li>
-              <li>
-                <div class="h5">Secure Data Handling</div>
-                <p>Confidential and safe processing of client information.</p>
-              </li>
-            </ul>
-          </div>
-          <div class="col-lg-6 py-3 wow fadeInRight">
-            <div class="img-fluid text-center">
-              <img src="./public/assets_front/img/banner_image_2.svg" alt="">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> <!-- .wrap -->
-  </div> <!-- .page-section -->
-
-
-  <div class="container faq-section">
-    <h2 class="faq-header title_text">Frequently Asked Questions</h2>
-    
-    <div id="faqAccordion">
-        <div class="card mb-3">
-            <div class="card-header" id="faqHeading1">
-                <h5 class="mb-0">
-                    <button class="btn btn-link" data-toggle="collapse" data-target="#faq1" aria-expanded="true" aria-controls="faq1">
-                        🔹 What types of ID cards do you provide?
-                    </button>
-                </h5>
-            </div>
-            <div id="faq1" class="collapse show" aria-labelledby="faqHeading1" data-parent="#faqAccordion">
-                <div class="card-body">
-                    We offer PVC ID cards, employee ID cards, school & college ID cards, RFID & smart cards, and customized ID solutions.
-                </div>
-            </div>
-        </div>
-
-        <div class="card mb-3">
-            <div class="card-header" id="faqHeading2">
-                <h5 class="mb-0">
-                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#faq2" aria-expanded="false" aria-controls="faq2">
-                        🔹 Can we order ID cards in bulk?
-                    </button>
-                </h5>
-            </div>
-            <div id="faq2" class="collapse" aria-labelledby="faqHeading2" data-parent="#faqAccordion">
-                <div class="card-body">
-                    Yes! We offer special discounts on bulk orders for schools, colleges, and corporate companies.
-                </div>
-            </div>
-        </div>
-
-        <div class="card mb-3">
-            <div class="card-header" id="faqHeading3">
-                <h5 class="mb-0">
-                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#faq3" aria-expanded="false" aria-controls="faq3">
-                        🔹 Do you provide RFID-enabled ID cards?
-                    </button>
-                </h5>
-            </div>
-            <div id="faq3" class="collapse" aria-labelledby="faqHeading3" data-parent="#faqAccordion">
-                <div class="card-body">
-                    Yes, we provide smart ID cards with RFID and barcode integration for access control and authentication.
-                </div>
-            </div>
-        </div>
-
-        <div class="card mb-3">
-            <div class="card-header" id="faqHeading4">
-                <h5 class="mb-0">
-                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#faq4" aria-expanded="false" aria-controls="faq4">
-                        🔹 How long does it take to process an order?
-                    </button>
-                </h5>
-            </div>
-            <div id="faq4" class="collapse" aria-labelledby="faqHeading4" data-parent="#faqAccordion">
-                <div class="card-body">
-                    Orders are processed within 3-5 business days, depending on the quantity and customization requirements.
-                </div>
-            </div>
-        </div>
-
-        <div class="card mb-3">
-            <div class="card-header" id="faqHeading5">
-                <h5 class="mb-0">
-                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#faq5" aria-expanded="false" aria-controls="faq5">
-                        🔹 Can we customize our ID cards with branding and logos?
-                    </button>
-                </h5>
-            </div>
-            <div id="faq5" class="collapse" aria-labelledby="faqHeading5" data-parent="#faqAccordion">
-                <div class="card-body">
-                    Absolutely! We offer complete customization, including logos, branding, colors, and security features.
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<section class="review-section" style="background: aliceblue;">
-  <div class="container">
-    <h2 class="text-center">Client Testimonials & Feedback</h2>
-    <div class="divider" style=" margin: 20px auto;"></div>
-    <p class="text-center">Discover what our happy clients are saying about their experience with Bharat ID Solution.<br>
-    Real feedback that showcases our dedication to quality and customer satisfaction.</p>
-    <div class="row g-4">
-      
-     
-
-      <!-- Add Review Form -->
-      <div class="col-md-6 mb-2">
-        <div class="form-section">
-          <h5 class="mb-4">Add Your Review</h5>
-          <form id="reviewform" action="javascript:void(0)" method="post">
-            <div class="mb-3">
-              <label for="name" class="form-label">Full Name</label>
-              <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name" required>
-            </div>
-            
-            <div class="mb-3">
-              <label for="review" class="form-label">Your Feedback</label>
-              <textarea id="review" name="review" class="form-control" rows="4" placeholder="Share your experience..." required></textarea>
-            </div>
-            
-            <div class="mb-3">
-              <label for="rating" class="form-label">Rating</label>
-              <select id="rating" name="rating" class="form-select form-control" required>
-                <option selected disabled value="">Choose rating</option>
-                <option value="5">★★★★★</option>
-                <option value="4">★★★★☆</option>
-                <option value="3">★★★☆☆</option>
-                <option value="2">★★☆☆☆</option>
-                <option value="1">★☆☆☆☆</option>
-              </select>
-            </div>
-            
-            <button type="submit" class="btn btn-primary">Submit Review</button>
-          </form>
-
-        </div>
-      </div>
-       <!-- Scrollable Review List -->
-       <div class="col-md-6">
-  <div class="scroll-area pe-2 review-scroll" style=" overflow-y: auto;">
-    
-  <%if $rating_review|@count > 0 %>
-  <%foreach from=$rating_review item=u %>
-    <div class="review-card d-flex align-items-start">
-      <div>
-        <h6 class="mb-0"><%$u['name']|capitalize %></h6>
-        <br>
-        <p><%$u['review'] %></p>
-        <div class="text-warning">
-          <%section name=star loop=$u['rating']%>★<%/section%>
-        </div>
-      </div>
-    </div>
-  <%/foreach%>
+</section>
 <%else%>
-  <p>No reviews found.</p>
+<!-- Fallback Static Hero if no banners -->
+<section class="hero-section min-h-[650px] flex items-center relative pt-24 pb-16">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    
+    <div class="container mx-auto px-6 relative z-10">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+            
+            <div data-aos="fade-right" data-aos-duration="1000">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm border border-blue-50 mb-6">
+                    <span class="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
+                    <span class="text-xs font-bold text-blue-700 tracking-wide uppercase">Identity Solutions Partner</span>
+                </div>
+                
+                <h1 class="text-5xl lg:text-6xl font-extrabold text-slate-800 mb-6 leading-tight">
+                    Professional Identities <br>
+                    <span class="text-gradient">Built on Trust</span>
+                </h1>
+                
+                <p class="text-slate-600 text-lg mb-8 leading-relaxed max-w-lg">
+                    We deliver high-quality, secure ID cards and branding accessories tailored for schools, corporates, and events. Fast, reliable, and premium.
+                </p>
+                
+                <div class="flex flex-wrap gap-4">
+                    <a href="product.html" class="px-8 py-4 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition shadow-lg shadow-blue-500/20">
+                        Explore Catalog
+                    </a>
+                    <button class="px-8 py-4 bg-white text-slate-700 border border-slate-200 font-bold rounded-lg hover:bg-slate-50 hover:text-blue-600 transition flex items-center gap-2" data-toggle="modal" data-target="#visitorModal">
+                        <i class="fas fa-arrow-down"></i> Download Brochure
+                    </button>
+                </div>
+            </div>
+            
+            <div class="relative" data-aos="fade-left" data-aos-duration="1000">
+                <div class="relative w-full max-w-md mx-auto aspect-square">
+                    <img src="https://img.freepik.com/free-vector/gradient-id-card-template_23-2149509825.jpg" alt="Premium ID Card" class="absolute inset-0 w-full h-full object-cover rounded-3xl shadow-2xl z-10 hover:scale-105 transition duration-500 border border-white/50">
+                    <div class="absolute -top-6 -right-6 bg-white p-4 rounded-2xl shadow-xl z-20 animate-bounce" style="animation-duration: 3s;">
+                        <i class="fas fa-check-circle text-4xl text-green-500"></i>
+                    </div>
+                    <div class="absolute -inset-4 bg-gradient-to-tr from-blue-100 to-purple-100 rounded-full blur-3xl opacity-60 -z-10"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <%/if%>
 
-   
-
-  </div>
-</div>
-
-
+<!-- Stats Section -->
+<section class="py-12 bg-white border-b border-slate-100">
+    <div class="container mx-auto px-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-slate-100">
+            <div data-aos="fade-up" data-aos-delay="0">
+                <h3 class="text-3xl font-bold text-slate-800 counter" data-target="500" data-suffix="+">0+</h3>
+                <p class="text-sm text-slate-500 mt-1 uppercase tracking-wide">Happy Clients</p>
+            </div>
+            <div data-aos="fade-up" data-aos-delay="100">
+                <h3 class="text-3xl font-bold text-slate-800 counter" data-target="100" data-suffix="k+">0k+</h3>
+                <p class="text-sm text-slate-500 mt-1 uppercase tracking-wide">ID Cards Printed</p>
+            </div>
+            <div data-aos="fade-up" data-aos-delay="200">
+                <h3 class="text-3xl font-bold text-slate-800 counter" data-target="5" data-suffix="+">0+</h3>
+                <p class="text-sm text-slate-500 mt-1 uppercase tracking-wide">Years Experience</p>
+            </div>
+            <div data-aos="fade-up" data-aos-delay="300">
+                <h3 class="text-3xl font-bold text-slate-800 counter" data-target="100" data-suffix="%">0%</h3>
+                <p class="text-sm text-slate-500 mt-1 uppercase tracking-wide">Quality Guarantee</p>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 
+<!-- Core Services -->
+<section class="py-24 bg-slate-50">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-16 max-w-2xl mx-auto" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4">Our Core Solutions</h2>
+            <p class="text-slate-600">
+                Tailored identification products designed to meet the unique needs of every sector, from education to corporate.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Service 1 -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover-lift group" data-aos="fade-up" data-aos-delay="100">
+                <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 mb-6 text-2xl group-hover:bg-blue-600 group-hover:text-white transition">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-800 mb-3">School IDs</h3>
+                <p class="text-slate-500 text-sm leading-relaxed mb-4">Secure student identification with integrated library/attendance barcodes.</p>
+                <a href="product.html" class="text-blue-600 font-bold text-sm hover:underline">Learn More</a>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover-lift group" data-aos="fade-up" data-aos-delay="200">
+                <div class="w-14 h-14 bg-purple-50 rounded-xl flex items-center justify-center text-purple-600 mb-6 text-2xl group-hover:bg-purple-600 group-hover:text-white transition">
+                    <i class="fas fa-building"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-800 mb-3">Corporate IDs</h3>
+                <p class="text-slate-500 text-sm leading-relaxed mb-4">Professional employee badges that enhance corporate branding and security.</p>
+                <a href="product.html" class="text-purple-600 font-bold text-sm hover:underline">Learn More</a>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover-lift group" data-aos="fade-up" data-aos-delay="300">
+                <div class="w-14 h-14 bg-cyan-50 rounded-xl flex items-center justify-center text-cyan-600 mb-6 text-2xl group-hover:bg-cyan-600 group-hover:text-white transition">
+                    <i class="fas fa-wifi"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-800 mb-3">Smart Cards</h3>
+                <p class="text-slate-500 text-sm leading-relaxed mb-4">RFID & NFC enabled cards for automated access control systems.</p>
+                <a href="product.html" class="text-cyan-600 font-bold text-sm hover:underline">Learn More</a>
+            </div>
+
+            <!-- Service 4 -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover-lift group" data-aos="fade-up" data-aos-delay="400">
+                <div class="w-14 h-14 bg-pink-50 rounded-xl flex items-center justify-center text-pink-600 mb-6 text-2xl group-hover:bg-pink-600 group-hover:text-white transition">
+                    <i class="fas fa-tshirt"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-800 mb-3">Lanyards</h3>
+                <p class="text-slate-500 text-sm leading-relaxed mb-4">Custom printed lanyards in various widths to match your specific needs.</p>
+                <a href="product.html" class="text-pink-600 font-bold text-sm hover:underline">Learn More</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Unique "Why Choose Us" Section (Replaced Video with Image) -->
+<section class="py-24 bg-white relative overflow-hidden">
+    <!-- Decorative Circle -->
+    <div class="absolute -right-20 top-20 w-80 h-80 bg-blue-50 rounded-full blur-3xl opacity-50"></div>
+    
+    <div class="container mx-auto px-6 relative z-10">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+            
+            <div data-aos="fade-right">
+                <!-- Replaced Image with Video -->
+                <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-gray-100 group">
+                    <video class="w-full h-[500px] object-cover transform group-hover:scale-105 transition duration-700" autoplay loop muted playsinline>
+                        <source src="public/assets_front/img/bharat_id_solution.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-8">
+                        <div>
+                            <p class="text-white font-bold text-lg">State-of-the-Art Production</p>
+                            <p class="text-white/80 text-sm">Ensuring precision in every card.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div data-aos="fade-left">
+                <span class="text-blue-600 font-bold tracking-wider text-sm uppercase mb-2 block">Why Choose Us</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-6">Excellence in Every Print</h2>
+                <p class="text-slate-600 text-lg mb-8 leading-relaxed">
+                    We distinguish ourselves through unwavering attention to detail and a commitment to customer satisfaction. Here is why hundreds of organizations trust Bharat ID Solution.
+                </p>
+
+                <div class="space-y-6">
+                    <!-- Feature 1 -->
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center text-green-600 text-xl shrink-0">
+                            <i class="fas fa-print"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-slate-800">Advanced Printing Tech</h4>
+                            <p class="text-slate-500 text-sm mt-1">We use the latest thermal and retransfer printers for sharp, fade-resistant results.</p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center text-orange-600 text-xl shrink-0">
+                            <i class="fas fa-cubes"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-slate-800">Bulk Order Capability</h4>
+                            <p class="text-slate-500 text-sm mt-1">Whether 50 or 50,000 cards, our production line handles it efficiently.</p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 text-xl shrink-0">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-slate-800">Data Security</h4>
+                            <p class="text-slate-500 text-sm mt-1">Your data is processed securely and deleted post-production to ensure privacy.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Catalog Preview (Premium UI) -->
+<section class="py-24 bg-white relative">
+    <!-- Background Decoration -->
+    <div class="absolute top-0 left-0 w-full h-1/2 bg-slate-50 skew-y-1 -z-0"></div>
+
+    <div class="container mx-auto px-6 relative z-10">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16" data-aos="fade-up">
+            <div class="max-w-2xl">
+                <span class="text-blue-600 font-bold tracking-wider text-sm uppercase mb-2 block">Our Collection</span>
+                <h2 class="text-4xl font-extrabold text-slate-800 mb-4 leading-tight">Featured Products</h2>
+                <div class="w-20 h-1.5 bg-blue-600 rounded-full mb-4"></div>
+                <p class="text-slate-600 text-lg">Discover our most popular identification solutions, crafted for quality and durability.</p>
+            </div>
+            
+            <a href="product.html" class="hidden md:inline-flex items-center gap-3 px-8 py-3 bg-blue-600 text-white rounded-full font-semibold shadow-lg hover:bg-blue-700 hover:shadow-blue-600/30 transition-all transform hover:-translate-y-1">
+                View All Products <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Product 1 -->
+            <a href="product.html?c=id_card" class="group bg-white rounded-3xl shadow-lg border border-slate-100 overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="100">
+                <div class="h-64 bg-gradient-to-br from-blue-50 to-indigo-50 relative flex items-center justify-center overflow-hidden">
+                    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMzcsIDk5LCAyMzUsIDAuMDUpIi8+PC9zdmc+')] opacity-50"></div>
+                    <div class="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-500 relative z-10">
+                        <span class="text-6xl filter drop-shadow-sm">🪪</span>
+                    </div>
+                </div>
+                <div class="p-8 text-center">
+                    <h4 class="text-xl font-extrabold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors">PVC Cards</h4>
+                    <p class="text-slate-500 text-sm mb-4 leading-relaxed">High-durability PVC cards with crisp thermal printing.</p>
+                    <span class="inline-block text-blue-600 font-bold text-sm tracking-wide opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">Explore Options &rarr;</span>
+                </div>
+            </a>
+
+            <!-- Product 2 -->
+            <a href="product.html?c=keychain" class="group bg-white rounded-3xl shadow-lg border border-slate-100 overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="200">
+                <div class="h-64 bg-gradient-to-br from-purple-50 to-fuchsia-50 relative flex items-center justify-center overflow-hidden">
+                    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMTQ3LCA1MSwgMjM0LCAwLjA1KSIvPjwvc3ZnPg==')] opacity-50"></div>
+                     <div class="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-500 relative z-10">
+                        <span class="text-6xl filter drop-shadow-sm">🔑</span>
+                    </div>
+                </div>
+                <div class="p-8 text-center">
+                    <h4 class="text-xl font-extrabold text-slate-800 mb-2 group-hover:text-purple-600 transition-colors">Keychains</h4>
+                    <p class="text-slate-500 text-sm mb-4 leading-relaxed">Custom shapes in Acrylic & Metal materials.</p>
+                     <span class="inline-block text-purple-600 font-bold text-sm tracking-wide opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">Explore Options &rarr;</span>
+                </div>
+            </a>
+
+            <!-- Product 3 -->
+            <a href="product.html?c=medals" class="group bg-white rounded-3xl shadow-lg border border-slate-100 overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="300">
+                <div class="h-64 bg-gradient-to-br from-yellow-50 to-orange-50 relative flex items-center justify-center overflow-hidden">
+                    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjM0LCAxNzksIDUxLCAwLjA1KSIvPjwvc3ZnPg==')] opacity-50"></div>
+                     <div class="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-500 relative z-10">
+                        <span class="text-6xl filter drop-shadow-sm">🏅</span>
+                    </div>
+                </div>
+                <div class="p-8 text-center">
+                    <h4 class="text-xl font-extrabold text-slate-800 mb-2 group-hover:text-yellow-600 transition-colors">Medals</h4>
+                    <p class="text-slate-500 text-sm mb-4 leading-relaxed">Premium awards for sports and corporate events.</p>
+                     <span class="inline-block text-yellow-600 font-bold text-sm tracking-wide opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">Explore Options &rarr;</span>
+                </div>
+            </a>
+
+            <!-- Product 4 -->
+            <a href="product.html?c=name_plate" class="group bg-white rounded-3xl shadow-lg border border-slate-100 overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="400">
+                <div class="h-64 bg-gradient-to-br from-cyan-50 to-teal-50 relative flex items-center justify-center overflow-hidden">
+                    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoNTEsIDE4OCwgMjM0LCAwLjA1KSIvPjwvc3ZnPg==')] opacity-50"></div>
+                     <div class="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-500 relative z-10">
+                        <span class="text-6xl filter drop-shadow-sm">🏷️</span>
+                    </div>
+                </div>
+                <div class="p-8 text-center">
+                    <h4 class="text-xl font-extrabold text-slate-800 mb-2 group-hover:text-cyan-600 transition-colors">Name Plates</h4>
+                    <p class="text-slate-500 text-sm mb-4 leading-relaxed">Elegant desk and door branding solutions.</p>
+                     <span class="inline-block text-cyan-600 font-bold text-sm tracking-wide opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">Explore Options &rarr;</span>
+                </div>
+            </a>
+        </div>
+        
+        <div class="mt-12 text-center md:hidden">
+            <a href="product.html" class="inline-flex items-center gap-3 px-8 py-3 bg-blue-600 text-white rounded-full font-semibold shadow-lg hover:bg-blue-700 hover:shadow-blue-600/30 transition-all">
+                View All Products <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-24 bg-white">
+    <div class="container mx-auto px-6 max-w-4xl">
+        <h2 class="text-3xl font-bold text-center mb-12 text-slate-800">Frequently Asked Questions</h2>
+        
+        <div class="space-y-4">
+            <!-- FAQ Item -->
+            <div class="border border-slate-200 rounded-xl overflow-hidden">
+                <button class="w-full px-6 py-5 text-left flex justify-between items-center bg-white hover:bg-slate-50 transition focus:outline-none" onclick="$(this).next().slideToggle(); $(this).find('i').toggleClass('rotate-180')">
+                    <span class="font-bold text-slate-700">What customization options do you offer?</span>
+                    <i class="fas fa-chevron-down text-slate-400 transition duration-300"></i>
+                </button>
+                <div class="hidden px-6 pb-6 text-slate-600 border-t border-slate-100 pt-4 leading-relaxed">
+                    We offer complete customization including full-color printing, variable data (names/photos/IDs), barcodes, QR codes, and mag-stripe encoding.
+                </div>
+            </div>
+            
+            <!-- FAQ Item -->
+            <div class="border border-slate-200 rounded-xl overflow-hidden">
+                <button class="w-full px-6 py-5 text-left flex justify-between items-center bg-white hover:bg-slate-50 transition focus:outline-none" onclick="$(this).next().slideToggle(); $(this).find('i').toggleClass('rotate-180')">
+                    <span class="font-bold text-slate-700">Is there a minimum order quantity?</span>
+                    <i class="fas fa-chevron-down text-slate-400 transition duration-300"></i>
+                </button>
+                <div class="hidden px-6 pb-6 text-slate-600 border-t border-slate-100 pt-4 leading-relaxed">
+                    No strict minimum for ID cards, but bulk orders (50+) attract significantly better pricing. Accessories usually have MOQs depending on the type.
+                </div>
+            </div>
+
+            <!-- FAQ Item -->
+            <div class="border border-slate-200 rounded-xl overflow-hidden">
+                <button class="w-full px-6 py-5 text-left flex justify-between items-center bg-white hover:bg-slate-50 transition focus:outline-none" onclick="$(this).next().slideToggle(); $(this).find('i').toggleClass('rotate-180')">
+                    <span class="font-bold text-slate-700">Do you ship across India?</span>
+                    <i class="fas fa-chevron-down text-slate-400 transition duration-300"></i>
+                </button>
+                <div class="hidden px-6 pb-6 text-slate-600 border-t border-slate-100 pt-4 leading-relaxed">
+                    Yes, we use reliable courier partners to ensure safe delivery of your products to any location in India.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Review Section -->
+<section class="py-24 bg-slate-50">
+    <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-16 text-slate-800">Client Feedback</h2>
+        
+        <div class="grid lg:grid-cols-2 gap-12">
+            <!-- Review List -->
+            <div class="space-y-6 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
+                <%if $rating_review|@count > 0 %>
+                    <%foreach from=$rating_review item=u %>
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                            <div class="flex items-center gap-1 text-yellow-400 mb-3 text-sm">
+                                <%section name=star loop=$u['rating']%>
+                                    <i class="fas fa-star"></i>
+                                <%/section%>
+                            </div>
+                            <p class="text-slate-600 italic mb-4">"<%$u['review'] %>"</p>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-500">
+                                    <%$u['name']|substr:0:1|upper %>
+                                </div>
+                                <h5 class="font-bold text-slate-800 text-sm"><%$u['name']|capitalize %></h5>
+                            </div>
+                        </div>
+                    <%/foreach%>
+                <%else%>
+                    <div class="text-center py-10 bg-white rounded-2xl border border-dashed border-slate-300">
+                        <p class="text-slate-500">No reviews yet. Share your experience!</p>
+                    </div>
+                <%/if%>
+            </div>
+
+            <!-- Review Form -->
+            <div class="bg-white p-8 md:p-10 rounded-2xl shadow-lg border border-slate-100">
+                <h4 class="text-2xl font-bold mb-6 text-slate-800">Write a Review</h4>
+                <form id="reviewform" action="javascript:void(0)" method="post" class="space-y-5">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 mb-2 uppercase tracking-wide">Your Name</label>
+                        <input type="text" name="name" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-500 focus:bg-white transition" placeholder="John Doe" required>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 mb-2 uppercase tracking-wide">Your Feedback</label>
+                        <textarea name="review" rows="4" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-500 focus:bg-white transition" placeholder="Share your experience..." required></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 mb-2 uppercase tracking-wide">Rating</label>
+                        <div class="relative">
+                            <select name="rating" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-500 focus:bg-white transition appearance-none" required>
+                                <option value="" disabled selected>Select Rating</option>
+                                <option value="5">★★★★★ Excellent</option>
+                                <option value="4">★★★★☆ Good</option>
+                                <option value="3">★★★☆☆ Average</option>
+                                <option value="2">★★☆☆☆ Poor</option>
+                                <option value="1">★☆☆☆☆ Terrible</option>
+                            </select>
+                            <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full py-4 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition shadow-lg hover:shadow-blue-500/20">Submit Review</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="py-20 bg-slate-900 overflow-hidden relative">
+    <div class="absolute top-0 right-0 w-96 h-96 bg-blue-600 rounded-full blur-[100px] opacity-20"></div>
+    <div class="absolute bottom-0 left-0 w-96 h-96 bg-purple-600 rounded-full blur-[100px] opacity-20"></div>
+    
+    <div class="container mx-auto px-6 relative z-10 text-center">
+        <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Start Your Project Today</h2>
+        <p class="text-slate-400 text-lg mb-10 max-w-xl mx-auto">Join hundreds of satisfied institutions. Quality layout, secure printing, and on-time delivery.</p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="contact.html" class="px-8 py-4 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition">Get a Free Quote</a>
+            <button class="px-8 py-4 bg-transparent border border-white/20 text-white font-bold rounded-lg hover:bg-white/10 transition" data-toggle="modal" data-target="#visitorModal">Download Catalog</button>
+        </div>
+    </div>
+</section>
 
 <script>
 $(document).ready(function () {
-  $("#reviewform").validate({
-    rules: {
-      name: {
-        required: true,
-        minlength: 2
-      },
-      review: {
-        required: true,
-        minlength: 10
-      },
-      rating: {
-        required: true
-      }
-    },
-    messages: {
-      name: {
-        required: "Please enter your name",
-        minlength: "Your name must be at least 2 characters long"
-      },
-      review: {
-        required: "Please enter your feedback",
-        minlength: "Feedback must be at least 10 characters long"
-      },
-      rating: {
-        required: "Please select a rating"
-      }
-    },
-    submitHandler: function(form) {
-      var formData = $("#reviewform").serialize();
-
-        $.ajax({
-          url: "save_review_data", // Replace with your PHP backend file
-          type: "POST",
-          data: formData,
-          success: function (response) {
-            response = JSON.parse(response);
-             if (response.success == 1) {
-              toastr.success(response.msg);
-            // $("#reviewform")[0].reset();
-            setTimeout(function() {
-              location.reload();
-            }, 3000);
-
-          }
-          },
-          error: function () {
-            toastr.error("There was an error. Please try again.");
-          }
+    // Initialize Hero Swiper
+    if ($('.heroSwiper').length) {
+        new Swiper('.heroSwiper', {
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            effect: 'fade',
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
         });
     }
-  });
+
+    $("#reviewform").validate({
+        rules: {
+            name: { required: true, minlength: 2 },
+            review: { required: true, minlength: 10 },
+            rating: { required: true }
+        },
+        submitHandler: function(form) {
+            var submitBtn = $(form).find('button[type="submit"]');
+            var originalBtnText = submitBtn.html();
+            
+            submitBtn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin mr-2"></i> Submitting...');
+
+            var formData = $("#reviewform").serialize();
+            $.ajax({
+                url: "save_review_data",
+                type: "POST",
+                data: formData,
+                success: function (response) {
+                    submitBtn.prop('disabled', false).html(originalBtnText);
+                    try {
+                        response = JSON.parse(response);
+                        if (response.success == 1) {
+                            toastr.success(response.msg);
+                            setTimeout(() => location.reload(), 2000);
+                        }
+                    } catch(e) {}
+                },
+                error: function () {
+                    submitBtn.prop('disabled', false).html(originalBtnText);
+                    toastr.error("Error submitting review");
+                }
+            });
+        }
+    });
+
+    // Counter Animation
+    const counters = document.querySelectorAll('.counter');
+    const animateCounters = (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const counter = entry.target;
+                const target = +counter.getAttribute('data-target');
+                const suffix = counter.getAttribute('data-suffix') || '';
+                const duration = 2000; // 2 seconds
+                
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    counter.innerText = Math.floor(progress * target) + suffix;
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+                observer.unobserve(counter);
+            }
+        });
+    };
+
+    const observer = new IntersectionObserver(animateCounters, {
+        threshold: 0.5
+    });
+
+    counters.forEach(counter => {
+        observer.observe(counter);
+    });
 });
 </script>
-

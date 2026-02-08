@@ -111,6 +111,11 @@ class Content extends MX_Controller
         $data = [];
         $this->smarty->loadFrontView('pages/termscondition.tpl',$data,'Yes','Yes');
     }
+    public function privacypolicy()
+    {
+        $data = [];
+        $this->smarty->loadFrontView('pages/privacypolicy.tpl',$data,'Yes','Yes');
+    }
     public function save_visitor_data()
     {
         $ret_arr = [];
@@ -318,7 +323,7 @@ public function product_details()
 	{
 		$data['base_url'] = base_url();
         // $product_id = $this->uri->segment(2); 
-        $product_id = $_GET['p']; 
+        $product_id = decode_id($_GET['id']); 
 		$data['products'] = $this->Content_model->get_products_details($product_id);
 		$data['products_image'] = $this->Content_model->get_products_image($product_id);
         // pr($data);

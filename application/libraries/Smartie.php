@@ -194,6 +194,7 @@ function setHeaderFooterPath(){
   {
       $data['config'] = $this->CI->config->config;
       $data['config']['current_route'] = $this->uri->segment(1);
+      $data['config']['uri_string'] = $this->uri->uri_string;
       $data['session_data'] = $this->CI->session->userdata();
       if (! $this->debug)
       {
