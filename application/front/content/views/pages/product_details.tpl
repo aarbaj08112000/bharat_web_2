@@ -507,6 +507,63 @@
     </div>
 </div>
 
+<!-- Related Products Section -->
+<%if !empty($related_products)%>
+<div class="related-products-section py-16 bg-gray-50">
+    <div class="container mx-auto px-6">
+        <div class="flex items-center justify-between mb-12">
+            <div>
+                <h2 class="text-3xl font-extrabold text-gray-900 mb-2">Related Products</h2>
+                <div class="h-1.5 w-20 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full"></div>
+            </div>
+            <a href="product.html?c=<%$products[0]['category_name']|replace:' ':'_'|lower%>" class="text-blue-600 font-bold hover:text-indigo-700 transition-colors flex items-center gap-2">
+                View All <i class="fas fa-arrow-right text-sm"></i>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <%foreach from=$related_products item=related %>
+                <%assign var="encodedID" value=$related['product_id']|@encode_id%>
+                <div class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-transparent hover:border-blue-100 overflow-hidden" data-aos="fade-up">
+                    <div class="relative aspect-square overflow-hidden bg-gray-50 p-6">
+                        <img src="public/uploads/product/<%$related['image']%>" 
+                             alt="<%$related['product_name']%>"
+                             class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
+                             onerror="this.onerror=null; this.src='https://placehold.co/400x400?text=No+Image';">
+                        <div class="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors"></div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider mb-2 block">
+                            <%$related['category_name']%>
+                        </span>
+                        <h3 class="text-lg font-bold text-gray-900 mb-4 line-clamp-1">
+                            <%$related['product_name']%>
+                        </h3>
+                        <a href="product_details.html?id=<%$encodedID%>" 
+                           class="inline-flex items-center justify-center w-full py-3 px-6 rounded-xl bg-gray-900 text-white font-semibold hover:bg-blue-600 transition-colors gap-2">
+                            <span>View Details</span>
+                            <i class="fas fa-external-link-alt text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+            <%/foreach%>
+        </div>
+    </div>
+</div>
+<style>
+    .related-products-section {
+        border-top: 1px solid rgba(0,0,0,0.05);
+    }
+    .line-clamp-1 {
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+</style>
+<%/if%>
+
 <script>
     // Change main image when thumbnail is clicked with smooth transition
     function changeMainImage(thumbnail) {

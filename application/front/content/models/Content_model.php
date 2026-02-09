@@ -111,5 +111,19 @@ class Content_model extends CI_Model {
             $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
             return $ret_data;
         }
+
+        public function get_related_products($category = "", $exclude_id = 0, $limit = 4) {
+            $this->db->select('p.*');
+            $this->db->from('product as p');
+            $this->db->where('p.is_delete', "0");
+            $this->db->where('p.status', 'Active');
+            $this->db->where('p.category_name', $category);
+            $this->db->where('p.product_id !=', $exclude_id);
+            $this->db->limit($limit);
+            $this->db->order_by('p.product_id', 'RANDOM');
+            $result_obj = $this->db->get();
+            $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
+            return $ret_data;
+        }
         
 }

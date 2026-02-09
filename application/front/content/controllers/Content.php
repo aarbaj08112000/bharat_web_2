@@ -326,6 +326,14 @@ public function product_details()
         $product_id = decode_id($_GET['id']); 
 		$data['products'] = $this->Content_model->get_products_details($product_id);
 		$data['products_image'] = $this->Content_model->get_products_image($product_id);
+        
+        if (!empty($data['products'])) {
+            $category = $data['products'][0]['category_name'];
+            $data['related_products'] = $this->Content_model->get_related_products($category, $product_id, 4);
+        } else {
+            $data['related_products'] = [];
+        }
+
         // pr($data);
 		// $this->smarty->loadView('product_details.tpl', $data, 'Yes', 'Yes');
         $this->smarty->loadFrontView('pages/product_details.tpl',$data,'Yes','Yes');
