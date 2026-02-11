@@ -36,14 +36,14 @@
 
 <!-- Dynamic Hero Section (Slider) -->
 <%if $config['banner']|@count > 0 %>
-<section class="hero-section relative h-[300px] md:h-[450px] lg:h-[550px] overflow-hidden">
+<section class="hero-section relative h-[275px] md:h-[450px] lg:h-[620px] overflow-hidden">
     <div class="swiper heroSwiper w-full h-full">
         <div class="swiper-wrapper">
             <%foreach from=$config['banner'] item=b name=bannerLoop%>
             <div class="swiper-slide relative flex flex-col items-center justify-center md:justify-end pb-8 md:pb-20">
                 <!-- Background Image -->
                 <div class="absolute inset-0 z-0">
-                   <img src="public/uploads/banner/<%$b['banner_image']%>" alt="<%$b['title']%>" class="w-full h-full object-cover">
+                   <img src="public/uploads/banner/<%$b['banner_image']%>" alt="<%$b['title']%>" class="w-full h-full object-cover" style="image-rendering: -webkit-optimize-contrast;" loading="eager" fetchpriority="high">
                    <!-- No Overlay as requested -->
                 </div>
 

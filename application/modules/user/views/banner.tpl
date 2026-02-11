@@ -80,7 +80,7 @@
                       <%foreach from=$banner item=val %>
                      <tr>
                         <!-- <td><%$i %></td> -->
-                        <td><img src="<%base_url()%>public/uploads/banner/<%$val['banner_image'] %>" atr="<%$val['banner_image'] %>" width="250" height="auto">
+                        <td><img src="<%base_url()%>public/uploads/banner/<%$val['banner_image'] %>" atr="<%$val['banner_image'] %>" width="200" height="100">
                         </td>
                         
                         <td style="font-weight: bold; 

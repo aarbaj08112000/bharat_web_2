@@ -217,7 +217,7 @@
   </div>
 
   <!-- Breadcrumb Header (Dynamic based on route) -->
-  <%if $config['current_route'] neq 'index.html'%>
+  <%if $config['current_route'] neq 'index.html' && $config['current_route'] neq '' %>
   <header class="pt-32 pb-12 text-center px-6 relative overflow-hidden bg-slate-900 text-white">
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-blue-500/10 blur-[100px] pointer-events-none"></div>
     
