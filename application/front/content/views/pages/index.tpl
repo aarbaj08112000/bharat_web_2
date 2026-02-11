@@ -32,6 +32,17 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+/* Sharp Image Rendering */
+.sharp-img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000px;
+}
 </style>
 
 <!-- Dynamic Hero Section (Slider) -->
@@ -43,7 +54,7 @@
             <div class="swiper-slide relative flex flex-col items-center justify-center md:justify-end pb-8 md:pb-20">
                 <!-- Background Image -->
                 <div class="absolute inset-0 z-0">
-                   <img src="public/uploads/banner/<%$b['banner_image']%>" alt="<%$b['title']%>" class="w-full h-full object-cover" style="image-rendering: -webkit-optimize-contrast;" loading="eager" fetchpriority="high">
+                   <img src="public/uploads/banner/<%$b['banner_image']%>" alt="<%$b['title']%>" class="w-full h-full object-cover sharp-img" loading="eager" fetchpriority="high">
                    <!-- No Overlay as requested -->
                 </div>
 
