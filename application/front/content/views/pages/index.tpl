@@ -488,7 +488,11 @@
         <p class="text-slate-400 text-lg mb-10 max-w-xl mx-auto">Join hundreds of satisfied institutions. Quality layout, secure printing, and on-time delivery.</p>
         <div class="flex flex-col sm:flex-row justify-center gap-4">
             <a href="contact.html" class="px-8 py-4 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition">Get a Free Quote</a>
-            <button class="px-8 py-4 bg-transparent border border-white/20 text-white font-bold rounded-lg hover:bg-white/10 transition" data-toggle="modal" data-target="#visitorModal">Download Catalog</button>
+            <a href="download_product_catalog" 
+                download 
+                class="px-8 py-4 bg-transparent border border-white/20 text-white font-bold rounded-lg hover:bg-white/10 transition">
+                Download Catalog
+            </a>
         </div>
     </div>
 </section>

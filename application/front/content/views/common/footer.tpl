@@ -126,9 +126,7 @@
                 
                 submitBtn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin mr-2"></i> Processing...');
 
-                const formData = {
-// ... existing formData logic ...
-                };
+                const formData = $(form).serialize();
 
                 $.ajax({
                     url: "save_visitor_data",
