@@ -36,11 +36,11 @@
 
 <!-- Dynamic Hero Section (Slider) -->
 <%if $config['banner']|@count > 0 %>
-<section class="hero-section relative h-[650px] overflow-hidden">
+<section class="hero-section relative h-[400px] md:h-[550px] lg:h-[650px] overflow-hidden">
     <div class="swiper heroSwiper w-full h-full">
         <div class="swiper-wrapper">
             <%foreach from=$config['banner'] item=b name=bannerLoop%>
-            <div class="swiper-slide relative flex flex-col items-center justify-end pb-20">
+            <div class="swiper-slide relative flex flex-col items-center justify-center md:justify-end pb-8 md:pb-20">
                 <!-- Background Image -->
                 <div class="absolute inset-0 z-0">
                    <img src="public/uploads/banner/<%$b['banner_image']%>" alt="<%$b['title']%>" class="w-full h-full object-cover">
@@ -48,17 +48,17 @@
                 </div>
 
                 <!-- Content -->
-                <div class="container mx-auto px-6 relative z-10 text-center">
+                <div class="container mx-auto px-0 md:px-6 relative z-10 text-center">
                     <div class="max-w-4xl mx-auto" data-aos="fade-up">
-                        <h1 class="text-4xl lg:text-6xl font-extrabold text-white mb-6 leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
+                        <h1 class="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 md:mb-6 leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
                             <%$b['title'] %>
                         </h1>
-                        <p class="text-white text-lg mb-10 leading-relaxed font-medium drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
+                        <p class="text-white text-base md:text-lg mb-6 md:mb-10 leading-relaxed font-medium drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
                             <%$b['description'] %>
                         </p>
                         
-                        <div class="flex justify-center">
-                            <a href="product.html" class="px-10 py-4 bg-blue-600 text-white font-bold rounded-full hover:bg-blue-700 transition shadow-xl hover:scale-105 transform duration-300">
+                        <div class="hidden md:flex justify-center">
+                            <a href="product.html" class="px-8 py-3 md:px-10 md:py-4 bg-blue-600 text-white font-bold rounded-full hover:bg-blue-700 transition shadow-xl hover:scale-105 transform duration-300">
                                 Explore Products
                             </a>
                         </div>
@@ -74,7 +74,7 @@
 </section>
 <%else%>
 <!-- Fallback Static Hero if no banners -->
-<section class="hero-section min-h-[650px] flex items-center relative pt-24 pb-16">
+<section class="hero-section min-h-[400px] md:min-h-[550px] lg:min-h-[650px] flex items-center relative pt-20 md:pt-24 pb-12 md:pb-16">
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
     
