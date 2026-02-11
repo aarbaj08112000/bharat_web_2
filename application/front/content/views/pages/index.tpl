@@ -36,7 +36,7 @@
 
 <!-- Dynamic Hero Section (Slider) -->
 <%if $config['banner']|@count > 0 %>
-<section class="hero-section relative h-[400px] md:h-[550px] lg:h-[650px] overflow-hidden">
+<section class="hero-section relative h-[300px] md:h-[450px] lg:h-[550px] overflow-hidden">
     <div class="swiper heroSwiper w-full h-full">
         <div class="swiper-wrapper">
             <%foreach from=$config['banner'] item=b name=bannerLoop%>
