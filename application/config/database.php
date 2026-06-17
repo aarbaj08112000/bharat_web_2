@@ -97,7 +97,7 @@ $db['default'] = array(
 	'port' => 3307
 );
 
-if($_SERVER['SERVER_NAME'] == 'bharatweb2.codecrafterinfotech.online'){
+if($_SERVER['SERVER_NAME'] == 'bharatweb2.codecrafterinfotech.in'){
 	$db['default']['username'] = 'u875583157_bharatweb2';
 	$db['default']['password'] = 'CodeCrafter@032022';
 	$db['default']['database'] = 'u875583157_bharatweb2';
